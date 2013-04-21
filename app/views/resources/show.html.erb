@@ -10,6 +10,32 @@
   <%= @resource.link %>
 </p>
 
+<p>
+  <b>Description:</b>
+  <%= @resource.description %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @resource.category.name %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= Vote.where(:resource_id => @resource.id).count%>
+</p>
+
+<% ### don't know if can skip to submit button, rather than using forms? %>
+<%= form_tag("/resources/like", :method => "post") do %>
+  <%= hidden_field_tag(:resource_id, @resource.id) %>
+  <%= submit_tag("Vote up") %>
+<% end %>
+
+<% ### should fix this so comes through as post and doesn't have ugly URL %>
+<%= form_tag("/comments/new", :method => "get") do %>
+  <%= hidden_field_tag(:resource_id, @resource.id) %>
+  <%= submit_tag("Comment") %>
+<% end %>
 
 <%= link_to 'Edit', edit_resource_path(@resource) %> |
 <%= link_to 'Back', resources_path %>

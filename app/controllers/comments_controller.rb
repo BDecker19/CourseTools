@@ -14,6 +14,8 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
+    @resource = Resource.find(:resource_id = @comment.resource_id])
+    redirect_to "/resources/#{@resource.id}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = Comment.new
+    @comment.resource_id = params[:resource_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -80,4 +83,5 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

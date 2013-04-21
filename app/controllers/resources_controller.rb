@@ -41,6 +41,7 @@ class ResourcesController < ApplicationController
   # POST /resources.json
   def create
     @resource = Resource.new(params[:resource])
+    @resource.category_id = params[:category_id]  ###not sure why you need to do this seperately? 
 
     respond_to do |format|
       if @resource.save
@@ -80,4 +81,15 @@ class ResourcesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  # CUSTOM METHODS
+  def like
+    @vote = Vote.new
+    @vote.resource_id = params[:resource_id]
+    @vote.save
+    
+    redirect_to "/resources/#{params[:resource_id]}"
+  end
+
 end

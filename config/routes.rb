@@ -1,17 +1,23 @@
 CourseTools::Application.routes.draw do
+
   resources :users
 
-
   resources :comments
-
+   member do 
+      get :index
+    end
 
   resources :categories
 
-
   resources :votes
 
+  resources :resources do
+    collection do 
+      post :like
+    end
+  end
 
-  resources :resources
+
 
 
   # The priority is based upon order of creation:

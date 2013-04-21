@@ -4,6 +4,8 @@
   <tr>
     <th>Name</th>
     <th>Link</th>
+    <th>Votes</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,9 +15,11 @@
   <tr>
     <td><%= resource.name %></td>
     <td><%= resource.link %></td>
+    <td><%= Vote.where(:resource_id => resource.id).count %></td>
     <td><%= link_to 'Show', resource %></td>
     <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
     <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Vote up', url_for(:controller => 'resources', :action => 'like', :resource_id => resource.id), :method => :post %></td>
   </tr>
 <% end %>
 </table>

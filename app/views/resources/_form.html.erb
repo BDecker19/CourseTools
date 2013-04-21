@@ -15,9 +15,27 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  
   <div class="field">
+    <% 
+      categories = Category.all
+      @category_array = []
+      categories.each {|category| @category_array << [category.name, category.id]}
+      ###is this the right way to do this?  seems like there should be a helper method to do this for me?
+
+    %>
+    <%= f.label :category %><br/>
+    <%= select_tag(:category_id, options_for_select(@category_array)) %>
+  </div>
+  
+
+    <div class="field">
     <%= f.label :link %><br />
     <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
   </div>
   <div class="actions">
     <%= f.submit %>
