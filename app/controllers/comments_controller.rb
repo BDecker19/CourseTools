@@ -14,21 +14,14 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
     @comment = Comment.find(params[:id])
-    @resource = Resource.find(:resource_id = @comment.resource_id])
-    redirect_to "/resources/#{@resource.id}"
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @comment }
-    end
+    redirect_to "/resources/#{@comment.resource_id}"
   end
 
   # GET /comments/new
   # GET /comments/new.json
   def new
     @comment = Comment.new
-    @comment.resource_id = params[:resource_id]
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @comment }
@@ -44,6 +37,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
+    @comment.resource_id = params[:resource_id]
 
     respond_to do |format|
       if @comment.save
@@ -83,5 +77,13 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # CUSTOM METHODS
+  def new_comment
+    @comment = Comment.new ### looks same in other controllers -- how come you do Comment.new twice, in both 'New' and 'Create'?
+    @comment.resource_id = params[:resource_id] ### and basically i need to keep dragging this thing through, in both the 'New' view and 'Create' controller action?
+    render :new
+  end
+
 
 end

@@ -2,10 +2,11 @@ CourseTools::Application.routes.draw do
 
   resources :users
 
-  resources :comments
-   member do 
-      get :index
+  resources :comments do
+    collection do 
+      post :new_comment
     end
+  end
 
   resources :categories
 
