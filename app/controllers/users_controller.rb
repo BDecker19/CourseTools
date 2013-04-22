@@ -41,17 +41,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    binding.pry
     if @user.save
       session[:user_id] = @user.id
-
       flash[:notice] = "Welcome #{@user.username}. You signed up successfully!"
       flash[:color]= "valid"
       render "/sessions/home"
     else
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
-      redirect_to "/users/new" 
+      redirect_to "/signup" 
     end
   end
 
