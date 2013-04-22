@@ -42,9 +42,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      binding.pry
+      session[:user_id] = @user.id
+
       flash[:notice] = "You Signed up successfully"
       flash[:color]= "valid"
-
       render "/sessions/home"
     else
       flash[:notice] = "Form is invalid"
