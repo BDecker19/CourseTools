@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   	protect_from_forgery
 	
+	before_filter :authenticate_user, :except => [:login, :login_attempt, :logout]
+	before_filter :save_login_state, :only => [:login, :login_attempt]
+
+
 	protected 
 		def authenticate_user
 			unless session[:user_id]

@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 
-	before_filter :authenticate_user, :only => [:home, :profile, :setting]
-	before_filter :save_login_state, :only => [:login, :login_attempt]
+	# originals
+	# before_filter :authenticate_user, :only => [:home, :profile, :setting]
+	# before_filter :save_login_state, :only => [:login, :login_attempt]
 
 
   	def login
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
 
 	def logout
 		session[:user_id] = nil
+		flash[:notice] = "You have successfully been logged out"
 		redirect_to :action => 'login'
 	end
 
