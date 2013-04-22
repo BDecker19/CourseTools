@@ -41,11 +41,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    binding.pry
     if @user.save
-      binding.pry
       session[:user_id] = @user.id
 
-      flash[:notice] = "You Signed up successfully"
+      flash[:notice] = "Welcome #{@user.username}. You signed up successfully!"
       flash[:color]= "valid"
       render "/sessions/home"
     else
