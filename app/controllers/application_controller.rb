@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   	protect_from_forgery
 	
-	before_filter :authenticate_user, :except => [:login, :login_attempt, :logout]
+	before_filter :authenticate_user, :except => [:login, :login_attempt, :logout, :signup]
 	before_filter :save_login_state, :only => [:login, :login_attempt]
-
 
 	protected 
 		def authenticate_user
@@ -25,17 +24,5 @@ class ApplicationController < ActionController::Base
 				return true
 			end
 		end
-
-
-  private
- 
-  # Finds the User with the ID stored in the session with the key
-  # :current_user_id This is a common way to handle user login in
-  # a Rails application; logging in sets the session value and
-  # logging out removes it.
-  def current_user
-    @_current_user ||= session[:current_user_id] &&
-      User.find_by_id(session[:current_user_id])
-  end
 
 end

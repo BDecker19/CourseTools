@@ -1,11 +1,9 @@
 CourseTools::Application.routes.draw do
 
+  # don't know why tutorial suggests doing each manually, but...
   get "sessions/login"
-
   get "sessions/home"
-
   get "sessions/profile"
-
   get "sessions/setting"
 
 

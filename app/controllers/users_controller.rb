@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   
+  skip_before_filter :authenticate_user, :only => [:new, :create]
   before_filter :save_login_state, :only => [:new, :create]
 
   # GET /users
@@ -29,11 +30,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    # commenting out as pet instructions
-    # respond_to do |format|
-    #   format.html # new.html.erb
-    #   format.json { render json: @user }
-    # end
   end
 
   # GET /users/1/edit
@@ -44,27 +40,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    # @user = User.new(params[:user])
-
-    # respond_to do |format|
-    #   if @user.save
-    #     format.html { redirect_to @user, notice: 'User was successfully created.' }
-    #     format.json { render json: @user, status: :created, location: @user }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "You Signed up successfully"
       flash[:color]= "valid"
+
+      render "/sessions/home"
     else
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
+      redirect_to "/users/new" 
     end
-    render "new"
   end
 
   # PUT /users/1
