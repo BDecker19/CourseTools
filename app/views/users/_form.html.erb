@@ -11,25 +11,31 @@
     $("#signupForm").validate({
 
       rules: {
-        "user[username]": {
-          // email_tip: true,  -- custom call format
-          required: true,
-        },
+        "user[username]": "required",
         "user[email]": {
-          // email_tip: true,  -- custom call format
           required: true,
           email: true
         },
-        "user[password]": {
-          // email_tip: true,  -- custom call format
-          required: true,
-        },
-        "user[password_confirmation]": {
-          // email_tip: true,  -- custom call format
-          required: true,
-        },
-
+        "user[password]": "required",
+        "user[password_confirmation]": "required",
+          // equalTo: "user[password]"
+       
+        // ref -- other format
+        // "user[password]": {
+        //    required: true,
+        //    email_tip: true,  --custom method call
+        // },
       },
+
+      messages: {
+        "user[username]": "Please specify your name",
+        "user[email]": {
+          required: "We need your email address to contact you",
+          email: "Your email address must be in the format of name@domain.com"
+      },
+   
+    }
+
 
       // errorPlacement: function(error, element) {
       //  error.appendTo( $("label:first") );
