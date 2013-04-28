@@ -18,6 +18,9 @@ class ApplicationController < ActionController::Base
 
 		def save_login_state
 			if session[:user_id]
+				if controller_name == "users" && action_name == "new"
+					flash[:notice] = "You're already in as #{User.find(session[:user_id]).username}.  Please logout if you wish to create a new account"
+				end
 				redirect_to(:controller => 'sessions', :action => 'home')
 				return false
 			else
