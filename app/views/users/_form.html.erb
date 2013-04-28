@@ -1,17 +1,66 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    // Custom method format
+    // $.validator.addMethod("email_tip", function(value) {
+    //   return value != 'you@site.com';
+    // }, "Must be different than 'you@site.com'");
+
+    // ###is there a way I assume that as the persion enters things a call can be made to check if the username etc is available?
+    //    does this require ajax or something?
+    $("#signupForm").validate({
+
+      rules: {
+        "user[username]": {
+          // email_tip: true,  -- custom call format
+          required: true,
+        },
+        "user[email]": {
+          // email_tip: true,  -- custom call format
+          required: true,
+          email: true
+        },
+        "user[password]": {
+          // email_tip: true,  -- custom call format
+          required: true,
+        },
+        "user[password_confirmation]": {
+          // email_tip: true,  -- custom call format
+          required: true,
+        },
+
+      },
+
+      // errorPlacement: function(error, element) {
+      //  error.appendTo( $("label:first") );
+      // },
+
+   });
+
+  });
+</script>
+
+
 <% @page_title = "UserAuth | Signup" %>
 <div class= "Sign_Form">
+
   <h1>Sign Up</h1>
-  <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+  
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}, :html => { :id => "signupForm"}) do |f| %>
 
-    <p> Username:</br> <%= f.text_field :username%> </p>
+    <%= f.label :username, "Username:" %>
+    <%= f.text_field :username%>
 
-    <p> Email:</br> <%= f.text_field :email%> </p>
+    <%= f.label :email, "Email:" %>
+    <%= f.text_field :email%>
 
-    <p> Password:</br> <%= f.password_field :password%></p>
+    <%= f.label :passowrd, "Password:" %>
+    <%= f.password_field :password%>
+    
+    <%= f.label :password_confirmation, "Password Confirmation:" %>
+    <%= f.password_field :password_confirmation%>
 
-    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-
-    <%= f.submit :m %>
+    <%= f.submit :Submit %>
   <% end %>
 
   <% if @user.errors.any? %>
