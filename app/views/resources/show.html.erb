@@ -25,30 +25,24 @@
   <%= Vote.where(:resource_id => @resource.id).count%>
 </p>
 
-<% # VOTE and COMMENT buttons%>
-
+<% # VOTE %>
 <% ### don't know if can skip to submit button, rather than using forms? %>
 <%= form_tag("/resources/like", :method => "post") do %>
   <%= hidden_field_tag(:resource_id, @resource.id) %>
   <%= submit_tag("Vote up") %>
 <% end %>
 
-<%= form_tag("/comments/new_comment", :method => "post") do %>
-  <%= hidden_field_tag(:resource_id, @resource.id) %>
-  <%= submit_tag("Comment") %>
-<% end %>
+<% # NEW COMMENT %>
+<%= render :partial => 'comment_box' # in 2 secs will need to add locals here! %>
 
 
 <% # DISPLAY COMMENTS%>
-
-<% 
-@comments = Comment.where("resource_id = #{@resource.id}")%>  <% ### I thought actionview was supposed to just do this for me if I type @resource.comments -- no? Which it doesn't seem to
-@comments.each do |comment|
-%>
-<p>
-  <b>Comment:</b>
-  <%= comment.body %>
-</p>    
+<% @comments = Comment.where("resource_id = #{@resource.id}")%>  <% ### I thought actionview was supposed to just do this for me if I type @resource.comments -- no? Which it doesn't seem to
+@comments.each do |comment|%>
+  <p>
+    <b>Comment:</b>
+    <%= comment.body %>
+  </p>    
 <%end%>
 
 <%= link_to 'Edit', edit_resource_path(@resource) %> |
