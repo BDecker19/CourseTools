@@ -39,6 +39,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.resource_id = params[:resource_id]
 
+    # need to save and get rid of actions below?
+
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
