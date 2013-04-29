@@ -38,9 +38,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.resource_id = params[:resource_id]
-    @comment.save!
-    render @comment
+    @comment.user_id = params[:user_id]
+    @comment.save
 
+    render :partial => 'comments/comment', :locals => { :comment => @comment }, :content_type => 'text/html'
     # respond_to do |format|
     #   if @comment.save
     #     format.html { redirect_to @comment, notice: 'Comment was successfully created.' }

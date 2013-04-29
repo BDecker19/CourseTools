@@ -14,7 +14,6 @@ class ResourcesController < ApplicationController
   # GET /resources/1.json
   def show
     @resource = Resource.find(params[:id])
-    @comment = Comment.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +25,6 @@ class ResourcesController < ApplicationController
   # GET /resources/new.json
   def new
     @resource = Resource.new
-    @comment = Comment.new
 
     respond_to do |format|
       format.html # new.html.erb
