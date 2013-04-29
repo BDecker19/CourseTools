@@ -32,10 +32,6 @@
   <%= submit_tag("Vote up") %>
 <% end %>
 
-<% # NEW COMMENT %>
-<%= render :partial => 'comment_box' # in 2 secs will need to add locals here! %>
-
-
 <% # DISPLAY COMMENTS%>
 <% @comments = Comment.where("resource_id = #{@resource.id}")%>  <% ### I thought actionview was supposed to just do this for me if I type @resource.comments -- no? Which it doesn't seem to
 @comments.each do |comment|%>
@@ -44,6 +40,10 @@
     <%= comment.body %>
   </p>    
 <%end%>
+
+<% # NEW COMMENT %>
+<%= render :partial => 'comment_box'%>
+
 
 <%= link_to 'Edit', edit_resource_path(@resource) %> |
 <%= link_to 'Back', resources_path %>
