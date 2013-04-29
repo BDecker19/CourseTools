@@ -1,11 +1,3 @@
-/*CUSTOM CSS (ie by Benji) */
-
-#signupForm label.error {
-	color: red;
-}
-
-
-/*-------------------*/
 .image-wrapper img
 {
 	display: block;
@@ -2150,4 +2142,14 @@ h1.large
 	{
 		content: none;
 	}
+}
+
+/*-------------------*/
+
+/*CUSTOM CSS (ie by Benji) */
+
+
+
+#signupForm label.error {
+	color: red;
 }

@@ -4,3 +4,15 @@
 <% if flash[:notice] %>
       <p class="notice"><%= flash[:notice] %></p>
 <% end %>
+
+<% @categories = Category.all %>
+<% @categories.each do |category| %>
+
+	<%= link_to category.name, category_path(category)%>  </br>
+
+<% end %>
+
+
+<br/>
+
+<%= link_to 'New Resource', new_resource_path %>
