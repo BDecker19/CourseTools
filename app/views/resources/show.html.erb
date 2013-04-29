@@ -32,13 +32,15 @@
 <% end %>
 
 <% # DISPLAY COMMENTS%>
-<% @comments = Comment.where("resource_id = #{@resource.id}")%>  <% ### I thought actionview was supposed to just do this for me if I type @resource.comments -- no? Which it doesn't seem to
-@comments.each do |comment|%>
-  <p>
-    <b>Comment:</b>
-    <%= comment.body %>
-  </p>    
-<%end%>
+<div id="comments">
+  <% @comments = Comment.where("resource_id = #{@resource.id}")%>  <% ### I thought actionview was supposed to just do this for me if I type @resource.comments -- no? Which it doesn't seem to
+  @comments.each do |comment|%>
+    <p>
+      <b>Comment:</b>
+      <%= comment.body %>
+    </p>    
+  <%end%>
+</div>
 
 <% # NEW COMMENT %>
 <%= render :partial => 'comment_box'%>

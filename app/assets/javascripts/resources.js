@@ -1,5 +1,5 @@
 $(document).ready ->
-  $("#new_post").on("ajax:success", (e, data, status, xhr) ->
-    $("#new_post").append xhr.responseText
+  $("#comments").on("ajax:success", (e, data, status, xhr) ->
+    $("#comments").append (data)
   ).bind "ajax:error", (e, xhr, status, error) ->
-    $("#new_post").append "<p>ERROR</p>"
+    $("#comments").append "<p>ERROR</p>"
