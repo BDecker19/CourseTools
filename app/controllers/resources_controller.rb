@@ -26,6 +26,7 @@ class ResourcesController < ApplicationController
   # GET /resources/new.json
   def new
     @resource = Resource.new
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # new.html.erb
